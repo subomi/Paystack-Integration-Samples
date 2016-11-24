@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>paystack standard</title>
+	</head>
+	<style type="text/css">
+		input, button {
+			margin: 2px;
+			padding: 10px;
+		}
+		button {
+			background-color: blue;
+			color: white;
+			border: 0px;
+			cursor: pointer;
+		}
+	</style>
+	<body>
+		<a href="/makepayment?productId=90&email=subomi@yahoo.com"><button>Make Payment</button></a>
+	</body>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+	<script type="text/javascript">
+		var link = document.getElementsByTagName('a')[0];
+
+		link.addEventListener("click", function(event){
+			// stop the normal flow 
+			event.preventDefault();
+			// xmlhttp request
+			$.getJSON(this.href, function(data) {
+				if(data.status) {
+					window.open(data.data.authorization_url, "_blank");
+					return;
+				}
+				console.log("An error occurred");
+			}).fail(function(error) {
+				console.log(error);
+			});
+			
+			
+			
+		});
+		
+	</script>
+</html>
