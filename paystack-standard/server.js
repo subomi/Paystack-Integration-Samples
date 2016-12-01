@@ -7,7 +7,6 @@ var fs = require("fs");
 var Transactions = paystack.transaction;
 // retrieving files like this is actually not perfomance optimum, use streams instead
 var index = fs.readFileSync("./index.html");
-var jquery = fs.readFileSync("./jquery.js");
 
 http.createServer(function(request, response) {
 var url = urlparser(request.url, true);
@@ -17,7 +16,8 @@ var url = urlparser(request.url, true);
 		response.end(index);
 		return;
 	}
-	
+
+	/* 	
 	// For jquery
 	if(url.pathname === "/jquery.js") {
 		console.log("Loading jquery.js");
@@ -25,6 +25,7 @@ var url = urlparser(request.url, true);
 		response.end(jquery);
 		return;
 	}
+	*/
 	
 	// payment route
 	if(url.pathname === "/makepayment") {
