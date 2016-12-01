@@ -23,6 +23,13 @@
 		$("#makePayment").each(function() {
 			this.addEventListener("click", makePayment("/makepayment", {firstname:'subomi', lastname:'Oluwalana', email: "subomi@yahoo.com"}));
 		});
+		
+		/***
+		 * makePayment receives the 3 args
+		 * url: The endpoint you are sending your request to
+		 * params: Params are the data you are sending alongside, most likely the form data of the user or something.
+		 * callback is used  to catch errors if any occurs, else it automatically opens a new window for payment. 
+		 */
 	
 		function makePayment(url, params, callback) {
 			// query string
