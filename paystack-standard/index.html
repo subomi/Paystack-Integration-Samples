@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>paystack standard</title>
+	</head>
+	<style type="text/css">
+		input, button {
+			margin: 2px;
+			padding: 10px;
+		}
+		button {
+			background-color: blue;
+			color: white;
+			border: 0px;
+			cursor: pointer;
+		}
+	</style>
+	<body>
+		<button id="makePayment">Make Payment</button>	
+	</body>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+	<script type="text/javascript">
+		$("#makePayment").each(function() {
+			this.addEventListener("click", makePayment("/makepayment", {firstname:'subomi', lastname:'Oluwalana', email: "subomi@yahoo.com"}));
+		});
+	
+		function makePayment(url, params, callback) {
+			// query string
+			var qs = $.param(params);
+			return function(event) {
+				url = url + '?' + qs;
+				// stop the normal flow
+				event.preventDefault();
+				$.getJSON(url, function(response) {
+					// It passed!
+					window.open(response.data.authorization_url, "_blank");
+					return;
+				}).fail(function(error) {
+					if(callback) {
+						callback(error);
+						return;
+					}
+					return;
+				});
+			}	
+		};
+	</script>
+</html>
